@@ -6,9 +6,10 @@ Tyler McGurrin*/
 #include <string.h>
 #include <unistd.h>
 #include <argp.h>
+#include "xpacd.h"
 
 const char *argp_program_version =
-  "XPM-RD-00003";
+  "XPM-RD-00004";
 const char *argp_program_bug_address =
   "We dont have one Yet!!!!";
 
@@ -57,7 +58,7 @@ parse_opt (int key, char *arg, struct argp_state *state)
       arguments->output_file = arg;
       break;
     case 'i':
-        
+        break;
 
     case ARGP_KEY_ARG:
       if (state->arg_num >= 2)
@@ -83,9 +84,7 @@ parse_opt (int key, char *arg, struct argp_state *state)
 /* Our argp parser. */
 static struct argp argp = { options, parse_opt, args_doc, doc };
 
-int
-main (int argc, char **argv)
-{
+int main (int argc, char **argv) {
   struct arguments arguments;
 
   /* Default values. */
@@ -107,6 +106,16 @@ main (int argc, char **argv)
   exit (0);
 }
 
-int install(char package) { // function that decompresses and installs packages
-
+int install(char* package) { // function that decompresses and installs packages
+    char* decompress = "tar -xf";
+    strcat(decompress, package);
+    system(decompress);
+    printf("Decompress Command = %s\nPackage = %s\n", decompress, package); // Debug String Remove at later date
+    {
+        char filepath = package;         
+        int len = strlen(filepath);
+        filepath[len-3] = '\0';
+        printf("%s\n",filepath); // Debug string remove later
+    }
+    char install = xpacd_parse(filepath);
 }
