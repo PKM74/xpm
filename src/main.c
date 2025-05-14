@@ -10,6 +10,7 @@ Tyler McGurrin*/
 #include "util.h"
 
 int debug_enable = false;
+int verbose_enable = false;
 
 char *package;
 
@@ -39,7 +40,7 @@ static struct argp_option options[] = {
 /* Used by main to communicate with parse_opt. */
 struct arguments
 {
-  char *args[1];                /* arg1 & arg2 */
+  char *args[0];                /* arg1 & arg2 */
   int silent, verbose, install;
   char *output_file;
 };
@@ -62,6 +63,7 @@ parse_opt (int key, char *arg, struct argp_state *state)
       break;
     case 'v':
       arguments->verbose = 1;
+      verbose_enable = true;
       break;
     case 'o':
       arguments->output_file = arg;
@@ -97,7 +99,7 @@ parse_opt (int key, char *arg, struct argp_state *state)
       break;
 
     case ARGP_KEY_END:
-      if (state->arg_num < 1)
+      if (state->arg_num < 0)
         /* Not enough arguments. */
         argp_usage (state);
       break;

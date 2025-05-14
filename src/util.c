@@ -10,8 +10,10 @@ Tyler McGurrin*/
 #include "xpakd.h"
 
 extern int debug_enable;
+extern int verbose_enable;
 
 int install(char* package) { // function that decompresses and installs packages
+  verbose_print("Decompressing Package...\n");
   char decompress[100] = "";
   char filepath[100] = "";
   strcpy(decompress, "tar -xf ");
@@ -35,6 +37,18 @@ void debug_print(const char* fmt, ...) {
     va_list args;
     va_start(args, fmt);
     printf("DEBUG : ");
+    vprintf(fmt, args);
+    va_end(args);
+  } else {
+    return;
+  }
+  return;
+}
+
+void verbose_print(const char* fmt, ...) {
+  if (verbose_enable == true) {
+    va_list args;
+    va_start(args, fmt);
     vprintf(fmt, args);
     va_end(args);
   } else {
