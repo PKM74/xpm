@@ -1,0 +1,4 @@
+CHECKSUM=SKIP // This will skip the verification check
+AUTHOR=Example Author
+INSTALL_DIR=/usr/bin
+

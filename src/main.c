@@ -6,7 +6,12 @@ Tyler McGurrin*/
 #include <string.h>
 #include <unistd.h>
 #include <argp.h>
-#include "xpacd.h"
+#include "xpakd.h"
+#include "util.h"
+
+int debug_enable = false;
+
+char *package;
 
 const char *argp_program_version =
   "XPM-RD-00004";
@@ -23,10 +28,11 @@ static char args_doc[] = "";
 /* The options we understand. */
 static struct argp_option options[] = {
   {"verbose",  'v', 0,      0,  "Produce verbose output" },
+  {"debug",  'd', 0,      0,  "Produce debug output" },
   {"quiet",    'q', 0,      0,  "Don't produce any output" },
   {"silent",   's', 0,      OPTION_ALIAS },
   {"output",   'o', "FILE", 0, "Output to FILE instead of standard output" },
-  {"install",  'i', "Packages", 0, "Install Packages"},
+  {"install",  'i', "PACKAGE", 0, "Install Packages"},
   { 0 }
 };
 
@@ -34,7 +40,7 @@ static struct argp_option options[] = {
 struct arguments
 {
   char *args[1];                /* arg1 & arg2 */
-  int silent, verbose;
+  int silent, verbose, install;
   char *output_file;
 };
 
@@ -48,6 +54,9 @@ parse_opt (int key, char *arg, struct argp_state *state)
 
   switch (key)
     {
+    case 'd':
+      debug_enable = true;
+      break;
     case 'q': case 's':
       arguments->silent = 1;
       break;
@@ -58,7 +67,24 @@ parse_opt (int key, char *arg, struct argp_state *state)
       arguments->output_file = arg;
       break;
     case 'i':
-        break;
+      printf("Continue With Install? [y/n] ");
+      char response;
+      scanf(" %c", &response);
+      if (response == 'y' || response == 'Y') {
+        package = arg;
+        printf("Starting Install...\n");
+        install(package);
+
+      } else if (response == 'n' || response == 'N') {
+
+        printf("Exiting...\n");
+        
+      } else {
+
+        printf("Invalid input. Please enter 'y' or 'n'.\n");
+
+      }
+      break;
 
     case ARGP_KEY_ARG:
       if (state->arg_num >= 2)
@@ -94,29 +120,15 @@ int main (int argc, char **argv) {
   arguments.install = 0;
 
   /* Parse our arguments; every option seen by parse_opt will
-     be reflected in arguments. */
+    be reflected in arguments. */
   argp_parse (&argp, argc, argv, 0, 0, &arguments);
 
   printf ("ARG1 = %s\nARG2 = %s\nOUTPUT_FILE = %s\n"
-          "VERBOSE = %s\nSILENT = %s\n",
-          arguments.args[0], arguments.args[1],
-          arguments.output_file,
-          arguments.verbose ? "yes" : "no",
-          arguments.silent ? "yes" : "no");
+            "VERBOSE = %s\nSILENT = %s\n",
+            arguments.args[0], arguments.args[1],
+            arguments.output_file,
+            arguments.verbose ? "yes" : "no",
+            arguments.silent ? "yes" : "no");
 
   exit (0);
-}
-
-int install(char* package) { // function that decompresses and installs packages
-    char* decompress = "tar -xf";
-    strcat(decompress, package);
-    system(decompress);
-    printf("Decompress Command = %s\nPackage = %s\n", decompress, package); // Debug String Remove at later date
-    {
-        char filepath = package;         
-        int len = strlen(filepath);
-        filepath[len-3] = '\0';
-        printf("%s\n",filepath); // Debug string remove later
-    }
-    char install = xpacd_parse(filepath);
 }
