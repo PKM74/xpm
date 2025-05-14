@@ -12,24 +12,36 @@ Tyler McGurrin*/
 extern int debug_enable;
 extern int verbose_enable;
 
-int install(char* package) { // function that decompresses and installs packages
-  verbose_print("Decompressing Package...\n");
-  char decompress[100] = "";
-  char filepath[100] = "";
-  strcpy(decompress, "tar -xf ");
-  strcat(decompress, package);
-  // strcat(decompress, ".tar ");
-  strcat(decompress, " --directory /tmp/");
-  debug_print("Decompress Command = %s\n", decompress);
-  system(decompress);
-  debug_print("Package Name = %s\n", package);
-  strcat(filepath, "/tmp/");
-  strcat(filepath, package);
-  int len = strlen(filepath);
-  filepath[len-4] = '\0';
-  debug_print("Decompressed Pacckage Filepath = %s\n",filepath);
-  
-  char install = xpacd_parse(filepath);
+void install(char* package) {
+  char* filepath = decompress(package);
+  char* xpakd = xpacd_parse(filepath);
+}
+
+int target_check(char* target) {
+FILE *fp;
+char path[1035];
+
+/* Open the command for reading. */
+fp = popen("uname -m", "r");
+if (fp == NULL) {
+  printf("Failed to get System ARCHITECTURE\n" );
+  exit(1);
+}
+char system[1035] = "";
+/* Read the output a line at a time - output it. */
+while (fgets(path, sizeof(path), fp) != NULL) {
+  strcat(system, path);
+}
+debug_print("System Arch = %s", system);
+debug_print("Program Arch = %s\n", target);
+if (target == system) {
+  return true;
+}
+
+/* close */
+pclose(fp);
+
+return 0;
 }
 
 void debug_print(const char* fmt, ...) {

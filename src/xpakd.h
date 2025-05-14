@@ -2,4 +2,5 @@
 Tyler McGurrin*/
 #pragma once
 
-char xpacd_parse(char* package_folder);
+char* decompress(char* package);
+char* xpacd_parse(char* package_folder);

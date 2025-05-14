@@ -1,9 +1,7 @@
-VERSION=1.2.3
+VERSION=1.0.0
 NAME=example-package
 TARGET=x86_64
-INSTALL-DIR=/usr/bin
-CHECKSUM='SKIP'
-WEBSITE=https://example.com
+CHECKSUM=SKIP
 
 install{
     cp ./source/example-binary /usr/bin
