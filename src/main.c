@@ -78,6 +78,7 @@ parse_opt (int key, char *arg, struct argp_state *state)
       } else if (response == 'n' || response == 'N') {
 
         printf("Exiting...\n");
+        exit(0);
         
       } else {
 
@@ -123,12 +124,12 @@ int main (int argc, char **argv) {
     be reflected in arguments. */
   argp_parse (&argp, argc, argv, 0, 0, &arguments);
 
-  printf ("ARG1 = %s\nARG2 = %s\nOUTPUT_FILE = %s\n"
-            "VERBOSE = %s\nSILENT = %s\n",
-            arguments.args[0], arguments.args[1],
-            arguments.output_file,
-            arguments.verbose ? "yes" : "no",
-            arguments.silent ? "yes" : "no");
+  // debug_print("ARG1 = %s\nARG2 = %s\nOUTPUT_FILE = %s\n"
+  //           "VERBOSE = %s\nSILENT = %s\n",
+  //           arguments.args[0], arguments.args[1],
+  //           arguments.output_file,
+  //           arguments.verbose ? "yes" : "no",
+  //           arguments.silent ? "yes" : "no");
 
   exit (0);
 }

@@ -4,20 +4,26 @@ Tyler McGurrin*/
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include "util.h"
 
-char xpacd_parse(char* file) {
+extern int debug_enable;
 
-  FILE *fptr = fopen(file, "r");
-  if (fptr == NULL) { 
-    printf("Invalid XPAKD File, Contents NULL\n");
-    return -1;  
+char xpacd_parse(char* package_folder) {
+  char filepath[100] = "";
+  strcpy(filepath, package_folder);
+  strcat(filepath, "/XPAKD");
+  debug_print("XPACKD Filepath = %s\n", filepath);
+  const char* file = filepath;
+  FILE* fptr;
+  fptr = fopen(filepath, "r");
+  char buff[100];
+  debug_print("XPAKD File Contents:\n\n");
+  while (fgets(buff, sizeof(buff), fptr) != NULL) {
+      debug_print("%s", buff);
   }
-
-  char ch;
-  while ((ch = fgetc(fptr)) != EOF) {
-    putchar(ch); 
-  }
-
   fclose(fptr);
   return 0;
 }

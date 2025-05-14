@@ -17,12 +17,14 @@ int install(char* package) { // function that decompresses and installs packages
   strcpy(decompress, "tar -xf ");
   strcat(decompress, package);
   // strcat(decompress, ".tar ");
-  strcat(decompress, "--directory /tmp/");
+  strcat(decompress, " --directory /tmp/");
   debug_print("Decompress Command = %s\n", decompress);
   system(decompress);
   debug_print("Package Name = %s\n", package);
   strcat(filepath, "/tmp/");
   strcat(filepath, package);
+  int len = strlen(filepath);
+  filepath[len-4] = '\0';
   debug_print("Decompressed Pacckage Filepath = %s\n",filepath);
   
   char install = xpacd_parse(filepath);
