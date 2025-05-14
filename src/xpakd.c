@@ -51,16 +51,17 @@ char* xpacd_parse(char* package_folder) {
       debug_print("%s", buff);
       strcat(xpakd_file, buff);
   }
-  debug_print("IGNORE needed NEWLINE (NOT IN FILE!!!\n");
+  debug_print("IGNORE needed NEWLINE (NOT IN FILE!!!)\n");
   fclose(fptr);
 
   verbose_print("Checking Architecture...\n");
 
-  char* target = "x86_64"; // yeah need to like make the rest of the parser its 3:45 am right now tho
-  char* version;
-  char* author;
-  char* checksum; // yeah thats for later!
+  char target[10] = ""; // yeah need to like make the rest of the parser its 3:45 am right now tho
+  char version[10] = "";
+  char author[50] = "";
+  char checksum[50] = ""; // yeah thats for later!
 
+  strcpy(target, string_parse(xpakd_file, "TARGET="));
 
 
 

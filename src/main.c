@@ -17,7 +17,7 @@ char *package;
 const char *argp_program_version =
   "XPM-RD-00005";
 const char *argp_program_bug_address =
-  "We dont have one Yet!!!!";
+  "<https://github.com/PKM74/xpm/issues>";
 
 /* Program documentation. */
 static char doc[] =

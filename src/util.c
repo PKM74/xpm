@@ -68,3 +68,28 @@ void verbose_print(const char* fmt, ...) {
   }
   return;
 }
+
+char* string_parse(char* string, char* substring) {
+  char* substr;
+  char retstr[50] = "";
+  char buffer[1000] = "";
+  debug_print("String Parse String:\n%s\n", string);
+  strcpy(string, substr);
+  substr[strlen(substr)-1]='\0';
+  if (strstr(string, substr))
+  {
+    strcpy(buffer, string);
+    for (;;) {
+      int n = 0;
+      char buf[1] = "";
+      // if (buf == "\0") break;
+
+      n++;
+      break; // remove later and make buf get one byte at a time from buffer
+
+    }
+    debug_print("Substring is Present\n");
+    // return retstr;
+  }
+  return "NULL";
+}
