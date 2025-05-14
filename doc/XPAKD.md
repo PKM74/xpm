@@ -1,2 +1,3 @@
 # XPAKD File
-Basic Desciptor file at the root of all package archives an example file is provided under the `example-package` directory in the root of this reposotory checksums are SHA1 if the checksum is `SKIP` it will skip the check oh and its for like one thing? just do it on the main binary it'll beee fiiiiineeeeeeee
+Basic Desciptor file at the root of all package archives an example file is provided under the `example-package` directory in the root of this reposotory checksums are SHA1 if the checksum is `SKIP` it will skip the check oh and its for like one thing? just do it on the main binary it'll beee fiiiiineeeeeeee... (Famous Last Words).
+A `^` marks the end of the file, jank i know but im bad at writing string parsers. nevermind this has been fixed, lol.

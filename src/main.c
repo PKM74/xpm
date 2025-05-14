@@ -15,13 +15,13 @@ int verbose_enable = false;
 char *package;
 
 const char *argp_program_version =
-  "XPM-RD-00005";
+  "XPM-RD-00006";
 const char *argp_program_bug_address =
   "<https://github.com/PKM74/xpm/issues>";
 
 /* Program documentation. */
 static char doc[] =
-  "A Simple Package Manager for GNU/Linux";
+  "A Simple Package Manager for GNU/Linux or Busybox/Linux if thats your thing.";
 
 /* A description of the arguments we accept. */
 static char args_doc[] = "";
