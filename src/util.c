@@ -12,15 +12,15 @@ Tyler McGurrin*/
 extern int debug_enable;
 
 int install(char* package) { // function that decompresses and installs packages
-  char* decompress;
-  char* filepath;
+  char decompress[100] = "";
+  char filepath[100] = "";
   strcpy(decompress, "tar -xf ");
   strcat(decompress, package);
-  strcat(decompress, ".tar ");
-  // strcat(decompress, "-C /tmp/");
-  // strcat(decompress, package);
-  // system(decompress);
-  debug_print("Decompress Command = %s\nPackage = %s\n", decompress, package);
+  // strcat(decompress, ".tar ");
+  strcat(decompress, "--directory /tmp/");
+  debug_print("Decompress Command = %s\n", decompress);
+  system(decompress);
+  debug_print("Package Name = %s\n", package);
   strcat(filepath, "/tmp/");
   strcat(filepath, package);
   debug_print("Decompressed Pacckage Filepath = %s\n",filepath);

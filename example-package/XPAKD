@@ -1,4 +1,11 @@
-CHECKSUM=SKIP // This will skip the verification check
-AUTHOR=Example Author
-INSTALL_DIR=/usr/bin
+VERSION=1.2.3
+NAME=example-package
+TARGET=x86_64
+INSTALL-DIR=/usr/bin
+CHECKSUM='SKIP'
+WEBSITE=https://example.com
 
+install{
+    cp ./source/example-binary /usr/bin
+    chmod +x /usr/bin/example-binary
+}

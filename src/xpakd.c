@@ -9,7 +9,7 @@ char xpacd_parse(char* file) {
 
   FILE *fptr = fopen(file, "r");
   if (fptr == NULL) { 
-    printf("Invalid XPAKD File, Contents NULL");
+    printf("Invalid XPAKD File, Contents NULL\n");
     return -1;  
   }
 
