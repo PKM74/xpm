@@ -91,6 +91,7 @@ int main (int argc, char **argv) {
   arguments.silent = 0;
   arguments.verbose = 0;
   arguments.output_file = "-";
+  arguments.install = 0;
 
   /* Parse our arguments; every option seen by parse_opt will
      be reflected in arguments. */
